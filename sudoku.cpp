@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -85,17 +86,35 @@ void print_sudoku(int sudoku[9][9])
 
 int main()
 {
-    int sudoku[9][9] = {
-    {3, 0, 6, 5, 0, 8, 4, 0, 0},
-    {5, 2, 0, 0, 0, 0, 0, 0, 0},
-    {0, 8, 7, 0, 0, 0, 0, 3, 1},
-    {0, 0, 3, 0, 1, 0, 0, 8, 0},
-    {9, 0, 0, 8, 6, 3, 0, 0, 5},
-    {0, 5, 0, 0, 9, 0, 6, 0, 0},
-    {1, 3, 0, 0, 0, 0, 2, 5, 0},
-    {0, 0, 0, 0, 0, 0, 0, 7, 4},
-    {0, 0, 5, 2, 0, 6, 3, 0, 0}};
-
+    int x;
+    ifstream inFile;
+    inFile.open("unsolved.txt");
+    if (!inFile) 
+    {
+    cerr << "Unable to open file datafile.txt";
+    exit(1);   // call system to stop
+    }
+    int unsolved_puzzle[81];
+    int sudoku[9][9];
+    int k = 0;
+    while (k<81) 
+    {
+        inFile >> x;
+        unsolved_puzzle[k] = x;           
+        k++;
+    }
+    inFile.close();
+    
+    int q = 0;
+    for(int i=0;i<9;i++)
+    {
+        for(int j=0;j<9;j++)
+        {
+            sudoku[i][j] = unsolved_puzzle[q];
+            q++;
+        }
+    }
+    
     cout<<"-------------------------"<<endl;
     if (solver(sudoku) == true)
     {
