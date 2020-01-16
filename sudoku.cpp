@@ -97,9 +97,8 @@ int main()
     int unsolved_puzzle[81];
     int sudoku[9][9];
     int k = 0;
-    while (k<81) 
+    while (inFile >> x) 
     {
-        inFile >> x;
         unsolved_puzzle[k] = x;           
         k++;
     }
