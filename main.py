@@ -67,8 +67,8 @@ def final(input_img):
          #   maxar = cv2.contourArea(cnt)
     
     avg = sum/len(contours)
-    maxar = 10000 
-    minar = 1000
+    maxar = 10000 #set area of the contours to be detected
+    minar = 1000    #set the image to be a given size (smaller than the test image testing123.jpg)
     for cnt in contours:
         x,y,w,h = cv2.boundingRect(cnt)
         #cv2.rectangle(im,(x,y),(x+w,y+h),(255,0,255),2)
