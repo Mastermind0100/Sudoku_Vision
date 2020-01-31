@@ -4,7 +4,7 @@ import operator
 
 kernel = np.ones((1,1), np.uint8) 
 
-img = cv2.imread('test.jpeg')
+img = cv2.imread('test2.jpg')
 img2gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 blur = cv2.GaussianBlur(img2gray.copy(),(9,9),0)
 th3 = cv2.adaptiveThreshold(blur,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY_INV,11,2)
