@@ -1,92 +1,41 @@
-import numpy as np
 import cv2
-from keras.models import load_model
-from keras.preprocessing import image
-from PIL import Image
+import numpy as np
+import operator
 
-arr_out = []
-arr_result = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+kernel = np.ones((1,1), np.uint8) 
 
-model=load_model('fmodelwts.h5')
+img = cv2.imread('test.jpeg')
+img2gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+blur = cv2.GaussianBlur(img2gray.copy(),(9,9),0)
+th3 = cv2.adaptiveThreshold(blur,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY_INV,11,2)
 
-def sortcnts(cnts):                 # to sort the contours left to right
-	
-	boundingBoxes = [cv2.boundingRect(c) for c in cnts]
-	(cnts, boundingBoxes) = zip(*sorted(zip(cnts, boundingBoxes),
-		key=lambda b:b[1][0], reverse=False))
- 
-	return (cnts)
+cnts,_ = cv2.findContours(th3,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+c = max(cnts, key = cv2.contourArea)
 
-def test(a,b,c,d,imd):                # to predict the character present in the region of interest
-    test=imd[b:b+d,a:a+c]
-    _,test_image = cv2.threshold(test,100,255,cv2.THRESH_BINARY)
-    test_image= cv2.copyMakeBorder(test_image,10,10,10,10,cv2.BORDER_CONSTANT,value=(255,255,255))
-    test_image = cv2.medianBlur(test_image.copy(),3)
-    test_image = cv2.resize(test_image.copy(),(64,64),interpolation = cv2.INTER_AREA)
-    t = test_image.copy()
-    cv2.resize(test_image,(64,64))
-    test_image=(image.img_to_array(test_image))/255
-    test_image=np.expand_dims(test_image, axis = 0)
-    result=model.predict(test_image)  
-    np.reshape(result, 36)
-    high = np.amax(test_image)
-    low = np.amin(test_image)
-    if high != low:
-        #print(result)
-        maxval = np.amax(result)
-        index = np.where(result == maxval)
-        #print('\n','Predicted Character:',arr_result[index[1][0]],'\n')
-        cv2.imshow('grg', t)
-        cv2.waitKey(0)
-        #print(maxval, ' ', arr_result[index[1][0]])
-        arr_out.append(arr_result[index[1][0]])
+bottom_right, _ = max(enumerate([pt[0][0] + pt[0][1] for pt in c]), key=operator.itemgetter(1))
+top_left, _ = min(enumerate([pt[0][0] + pt[0][1] for pt in c]), key=operator.itemgetter(1))
+bottom_left, _ = min(enumerate([pt[0][0] - pt[0][1] for pt in c]), key=operator.itemgetter(1))
+top_right, _ = max(enumerate([pt[0][0] - pt[0][1] for pt in c]), key=operator.itemgetter(1))
 
-def final(input_img):    
-    im = input_img.copy()
-    img = cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
-    
-    #Code for enhancing the image--------------------------------------------------
-    
-    blur = cv2.bilateralFilter(img.copy(),9,75,75)
-    _, thresh = cv2.threshold(blur.copy(), 100, 255, cv2.THRESH_BINARY)
-    #cv2.imshow('tt', thresh)
-    #cv2.waitKey(0)
-    #------------------------------------------------------------------------------
-    
-    cv2.imshow('testing123', thresh)
-    cv2.waitKey(0)
-    contours, h = cv2.findContours(thresh.copy(),cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    #contours = sortcnts(contours)
-    sum = 0
-    maxar = 0
-    #sorted(contours)
-    for cnt in contours:
-        x,y,w,h = cv2.boundingRect(cnt)
-        sum += (w*h)
-        #if cv2.contourArea(cnt)>maxar:
-         #   maxar = cv2.contourArea(cnt)
-    
-    avg = sum/len(contours)
-    maxar = 10000 #set area of the contours to be detected
-    minar = 1000    #set the image to be a given size (smaller than the test image testing123.jpg)
-    for cnt in contours:
-        x,y,w,h = cv2.boundingRect(cnt)
-        #cv2.rectangle(im,(x,y),(x+w,y+h),(255,0,255),2)
-        #tst = cv2.equalizeHist(img)
-        #print(w*h)
-        if w*h < maxar and w*h > minar:
-            test(x,y,w,h,img)
+bottom_left = c[bottom_left][0]
+bottom_right = c[bottom_right][0]
+top_left = c[top_left][0]
+top_right = c[top_right][0]
 
-    final = ""
-    i = 0
-    for ch in reversed(arr_out):
-        i += 1
-        final = final+ch
+d1 = ((top_left[0]-top_right[0])**2 + (top_left[1]-top_right[1])**2)**(0.5)
+d2 = ((top_left[0]-bottom_left[0])**2 + (top_left[1]-bottom_left[1])**2)**(0.5)
+d3 = ((bottom_left[0]-bottom_right[0])**2 + (bottom_left[1]-bottom_right[1])**2)**(0.5)
+d4 = ((bottom_right[0]-top_right[0])**2 + (bottom_right[1]-top_right[1])**2)**(0.5)
 
-    print('\n',final)
+side = max([d1,d2,d3,d4])
+src = np.array([top_left, top_right, bottom_right, bottom_left], dtype='float32')
+dst = np.array([[0, 0], [side - 1, 0], [side - 1, side - 1], [0, side - 1]], dtype='float32')
+m = cv2.getPerspectiveTransform(src, dst)
+finimg = cv2.warpPerspective(img, m, (int(side), int(side)))
 
-inim = cv2.imread('testing123.png')
-final(inim)
+newimg = cv2.drawContours(img.copy(),c,-1,(0,255,0),2)
+
+cv2.imshow('contours', finimg)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
