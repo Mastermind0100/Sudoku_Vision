@@ -36,6 +36,7 @@ finimg = cv2.warpPerspective(img, m, (int(side), int(side)))
 newimg = cv2.drawContours(img.copy(),c,-1,(0,255,0),2)
 
 cv2.imshow('contours', finimg)
+cv2.imwrite('square.png',finimg)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
