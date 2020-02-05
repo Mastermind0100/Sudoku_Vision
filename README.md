@@ -12,6 +12,8 @@ Abandoning a candidate typically results in visiting a previous stage of the pro
 
 Backtracking is a systematic way of trying out different sequences of decisions until we find one that "works."
 
+---
+
 ## Pseudocode
 ```cpp
 function backtrack(position){
@@ -39,16 +41,39 @@ A fully filled grid is a solution if:
 - Each row has all numbers form 1 to 9.
 - Each column has all numbers form 1 to 9.
 - Each sub-grid (if any) has all numbers form 1 to 9.
-
+---
 ## Cloning
 ```bash
 $ git clone https://github.com/7enTropy7/Sudoku_Vision.git
 ```
 
-## How it Works
+## Dependencies
+```bash
+$ pip3 install -r requirements.txt
+```
+## Directory Contents
+```bash
+$ cd Sudoku_Vision
+$ tree
+.
+├── a.out
+├── app.py
+├── fmodelwts.h5
+├── main.py
+├── README.md
+├── requirements.txt
+├── square.png
+├── sudoku.cpp
+├── test2.jpg
+├── test_images
+│   └── 2020-02-04_01-22-40.png
+├── testing123.png
+├── test.jpeg
+└── unsolved.txt
 
-![m6e1QyV](https://user-images.githubusercontent.com/36446402/72595594-2f1f1100-3930-11ea-88b1-380db6fa5048.gif)
-
+1 directory, 13 files
+```
+---
 ## Image Processing
 ### Image Input
 ![test2](https://user-images.githubusercontent.com/36445600/73818844-3e4cfc80-4814-11ea-90c1-9984e0e747dd.jpg)
@@ -56,8 +81,13 @@ $ git clone https://github.com/7enTropy7/Sudoku_Vision.git
 ### Processed Image
 ![square](https://user-images.githubusercontent.com/36445600/73818744-09d94080-4814-11ea-95fe-8ace558b2422.png)
 
+## Backtracking Algorithm
+
+![m6e1QyV](https://user-images.githubusercontent.com/36446402/72595594-2f1f1100-3930-11ea-88b1-380db6fa5048.gif)
+
+
 ## Authors
-[![LinkedIn-profile](https://img.shields.io/badge/LinkedIn-Unnikrishnan-teal.svg)](https://www.linkedin.com/in/unnikrishnan-menon-aa013415a/) [![LinkedIn-profile](https://img.shields.io/badge/LinkedIn-Atharva-blue.svg)](https://www.linkedin.com/in/atharva-hudlikar/)
+[![LinkedIn-profile](https://img.shields.io/badge/LinkedIn-Unnikrishnan-teal.svg)](https://www.linkedin.com/in/unnikrishnan-menon-aa013415a/) [![LinkedIn-profile](https://img.shields.io/badge/LinkedIn-Atharva-blueviolet.svg)](https://www.linkedin.com/in/atharva-hudlikar/)
 
 * [**Unnikrishnan Menon**](https://github.com/7enTropy7)
 * [**Atharva Hudlikar**](https://github.com/Mastermind0100)
