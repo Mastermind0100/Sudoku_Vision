@@ -49,9 +49,15 @@ $ git clone https://github.com/7enTropy7/Sudoku_Vision.git
 
 ![m6e1QyV](https://user-images.githubusercontent.com/36446402/72595594-2f1f1100-3930-11ea-88b1-380db6fa5048.gif)
 
+## Image Processing
+### Image Input
+![test2](https://user-images.githubusercontent.com/36445600/73818844-3e4cfc80-4814-11ea-90c1-9984e0e747dd.jpg)
+
+### Processed Image
+![square](https://user-images.githubusercontent.com/36445600/73818744-09d94080-4814-11ea-95fe-8ace558b2422.png)
 
 ## Authors
-[![LinkedIn-profile](https://img.shields.io/badge/LinkedIn-Unnikrishnan-blue.svg)](https://www.linkedin.com/in/unnikrishnan-menon-aa013415a/) [![LinkedIn-profile](https://img.shields.io/badge/LinkedIn-Atharva-orange.svg)](https://www.linkedin.com/in/atharva-hudlikar/)
+[![LinkedIn-profile](https://img.shields.io/badge/LinkedIn-Unnikrishnan-teal.svg)](https://www.linkedin.com/in/unnikrishnan-menon-aa013415a/) [![LinkedIn-profile](https://img.shields.io/badge/LinkedIn-Atharva-blue.svg)](https://www.linkedin.com/in/atharva-hudlikar/)
 
 * [**Unnikrishnan Menon**](https://github.com/7enTropy7)
 * [**Atharva Hudlikar**](https://github.com/Mastermind0100)
