@@ -87,7 +87,14 @@ $ tree
 
 
 ## Authors
-[![LinkedIn-profile](https://img.shields.io/badge/LinkedIn-Unnikrishnan-teal.svg)](https://www.linkedin.com/in/unnikrishnan-menon-aa013415a/) [![LinkedIn-profile](https://img.shields.io/badge/LinkedIn-Atharva-blueviolet.svg)](https://www.linkedin.com/in/atharva-hudlikar/)
+[![LinkedIn-profile](https://img.shields.io/badge/LinkedIn-Unnikrishnan-teal.svg)](https://www.linkedin.com/in/unnikrishnan-menon-aa013415a/) [![LinkedIn-profile](https://img.shields.io/badge/LinkedIn-Atharva-orange.svg)](https://www.linkedin.com/in/atharva-hudlikar/)
 
 * [**Unnikrishnan Menon**](https://github.com/7enTropy7)
 * [**Atharva Hudlikar**](https://github.com/Mastermind0100)
+
+
+## License
+
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](http://badges.mit-license.org)
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
