@@ -101,7 +101,7 @@ for i in range(len(arr_out)):
 print(arr_out)
 
 with open('unsolved.txt', 'w') as f:
-    for number in arr_out:
+    for number in arr_out: 
         f.write("%d\n" % number)
 
 if platform.system() == 'Linux': 
