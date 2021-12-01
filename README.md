@@ -1,6 +1,7 @@
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 # Sudoku_Vision
-This C++ code can solve a 9x9 sudoku puzzle using Backtracking Algorithm!
+This C++ code can solve a 9x9 sudoku puzzle using Backtracking Algorithm! <br>
+For the Telegram bot refer to [this](https://github.com/Mastermind0100/Telegram-Sudoku-Solver) repository!
 
 ![Screenshot from 2019-05-07 21-40-20](https://user-images.githubusercontent.com/36446402/57315344-04c65400-7111-11e9-939c-fce34eb7ceea.png)
 
